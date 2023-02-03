@@ -1,0 +1,13 @@
+[user]
+	email = mitsunori22@gmail.com
+	name = Gyoza
+
+[alias]
+	st = status
+	br = branch
+	sw = switch
+	cm = commit
+[ini]
+	defaultBranch = main
+[init]
+	defaultBranch = main
