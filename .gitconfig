@@ -7,6 +7,7 @@
 	br = branch
 	sw = switch
 	cm = commit
+	push-f = push --force-with-lease
 [ini]
 	defaultBranch = main
 [init]
