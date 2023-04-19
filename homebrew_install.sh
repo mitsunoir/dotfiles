@@ -13,12 +13,11 @@ echo "Run brew upgrade..."
 brew upgrade --all
 
 formulas=(
-    git
-    ripgrep
     binutils
     cmatrix
     coreutils
     diffutils
+    direnv
     docker
     docker-compose
     exa
@@ -26,15 +25,18 @@ formulas=(
     findutils
     fzf
     gawk
+    git
     gnu-sed
     gnu-tar
     gnu-which
     gzip
+    haskell-stack
     jq
     lima
     neovim
     pyenv
     qemu
+    ripgrep
     tmux
     wget
     zstd
