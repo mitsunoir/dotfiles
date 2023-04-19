@@ -8,7 +8,7 @@
 	sw = switch
 	cm = commit
     lg = log --oneline
-	push-f = push --force-with-lease
+	push-f = push --force-with-lease --force-if-includes
 [ini]
 	defaultBranch = main
 [init]
