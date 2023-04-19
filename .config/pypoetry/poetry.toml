@@ -1,0 +1,4 @@
+[settings]
+virtualenvs.in-project = true
+experimental.new-installer = true
+

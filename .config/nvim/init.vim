@@ -18,6 +18,12 @@ Plug 'fatih/vim-go'
 Plug 'shaunsingh/solarized.nvim'
 Plug 'vim-skk/eskk.vim'
 
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'neomake/neomake'
+
 call plug#end()
 
 syntax enable
