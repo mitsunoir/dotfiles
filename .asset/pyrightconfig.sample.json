@@ -1,0 +1,21 @@
+{
+  "include": [
+    "*"
+  ],
+  "exclude": [
+    "**/__pycache__",
+    ".venv"
+  ],
+  "reportMissingImports": true,
+  "pythonPath": ".venv/bin/python",
+  "venvPath": ".venv",
+  "executionEnvironments": [
+    {
+      "typeCheckingMode": "basic",
+      "extraPaths": [
+        ".venv/lib/python3.10/site-packages"
+      ]
+    }
+  ]
+}
+
