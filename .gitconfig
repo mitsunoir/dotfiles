@@ -1,15 +1,67 @@
-[user]
-	email = mitsunori22@gmail.com
-	name = Gyoza
+[pull]
+	rebase = true
 
 [alias]
-	st = status
 	br = branch
-	sw = switch
 	cm = commit
-    lg = log --oneline
-	push-f = push --force-with-lease --force-if-includes
-[ini]
-	defaultBranch = main
+	co = checkout
+	cp = cherry-pick
+	dc = diff --cached
+	df = diff
+	lg = log --oneline
+	push-fwlfii = push --force-with-lease --force-if-includes
+	st = status
+	sw = switch
+	unstg = restore --staged
+
+  fza = "!f() { \
+    git ls-files -m -o --exclude-standard | \
+    fzf -m --preview 'git diff --color=always -- {}' | \
+    xargs -r git add; \
+  }; f"
+  fsw = "!f() { \
+    branch=$(git for-each-ref --format='%(refname:short)' refs/heads refs/remotes | \
+    grep -v '^HEAD$' | \
+    fzf --ansi --preview 'git log -n 10 --oneline --decorate --color=always -- {1}' --preview-window=up:60%:wrap); \
+    [ -n \"$branch\" ] && git switch \"$branch\"; \
+  }; f"
+  ffc = "!f() { \
+    target_files=$(git diff --cached --name-only); \
+    [ -z \"$target_files\" ] && echo 'No staged files.' && exit 1; \
+    commits=$(git log main..HEAD --oneline -- $target_files); \
+    echo \"$commits\" | \
+    fzf --ansi --preview 'git show --color=always {1}' --preview-window=up:60%:wrap | \
+    awk '{print $1}' | \
+    xargs -r -I{} git commit --fixup={}; \
+  }; f"
+  ffci = "!f() { \
+    base=$(git merge-base HEAD origin/main); \
+    commits=$(git log --oneline ${base}..HEAD); \
+    echo \"$commits\" | \
+    fzf --ansi --preview 'git show --color=always {1}' --preview-window=up:60%:wrap | \
+    awk '{print $1}' | \
+    xargs -r -I{} git commit --fixup={}; \
+  }; f"
+  mkbr = "!f() { \
+    name=$(git config user.name | awk '{print tolower($2)}'); \
+    date=$(date +%Y%m%d); \
+    arg=\"$1\"; \
+    if [ -z \"$arg\" ]; then echo 'Usage: git mkbr <branch-name>' >&2; exit 1; fi; \
+    branch=\"${name}/${date}/${arg}\"; \
+    echo \"Creating branch: $branch\"; \
+    git checkout -b \"$branch\"; \
+  }; f"
+  autosquash = "!f() { \
+    base=$(git merge-base HEAD origin/main); \
+    echo \"Rebasing onto common ancestor with origin/main: $base\"; \
+    git rebase --interactive --autosquash $base; \
+  }; f"
+
+
+[user]
+	name = mitsunoir
+	email = mitsunori22@gmail.com
 [init]
 	defaultBranch = main
+[push]
+	autoSetupRemote = true
